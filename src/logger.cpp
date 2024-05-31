@@ -1,21 +1,5 @@
-#pragma once
+#include "logger.h"
 
-#include <iostream>
-#include <string>
-#include <spdlog/spdlog.h>
-
-enum class LogLevel {
-    Trace,
-    Debug,
-    Info,
-    Warn,
-    Error,
-    Critical,
-    Off,
-    Unknown
-};
-
-// Get the log level string from the environment variable
 std::string getLogLevelFromEnvironment() {
     const char* envValue = std::getenv("LOG_LEVEL");
     if (envValue) {
@@ -26,7 +10,6 @@ std::string getLogLevelFromEnvironment() {
     }
 }
 
-// Convert log level string to LogLevel enum
 LogLevel parseLogLevel(const std::string& logLevelStr) {
     if (logLevelStr == "trace") {
         return LogLevel::Trace;
@@ -48,7 +31,6 @@ LogLevel parseLogLevel(const std::string& logLevelStr) {
     }
 }
 
-// Convert LogLevel enum to spdlog::level::level_enum
 spdlog::level::level_enum toSpdlogLevel(const std::string& logLevelStr) {
     LogLevel logLevel = parseLogLevel(logLevelStr);
     
